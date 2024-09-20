@@ -1,17 +1,22 @@
-<h1><%= @article.title %></h1>
 
-<p><%= @article.body %></p>
+  <h1 class="mb-4"><%= @article.title %></h1>
 
-<ul>
-  <li><%= link_to "Edit", edit_article_path(@article) %></li>
-  <li><%= link_to "Destroy", article_path(@article), data: {
-                    turbo_method: :delete,
-                    turbo_confirm: "Are you sure?"
-                  } %></li>
-</ul>
+  <p class="lead"><%= @article.body %></p>
 
-<h2>Comments</h2>
-<%= render @article.comments %>
+  <div class="d-flex mb-4">
+    <%= link_to "Edit", edit_article_path(@article), class: "btn btn-warning me-2" %>
+    <%= link_to "Destroy", article_path(@article), class: "btn btn-danger", data: { 
+          turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
+  </div>
 
-<h2>Add a comment:</h2>
-<%= render "comments/form", article: @article %>
+  <h2>Comments</h2>
+  <div class="list-group mb-4">
+    <%= render @article.comments %>
+  </div>
+
+  <h2 class="mb-3">Add a comment:</h2>
+  <div class="card">
+    <div class="card-body">
+      <%= render "comments/form", article: @article %>
+    </div>
+  </div>

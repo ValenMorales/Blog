@@ -1,26 +1,28 @@
-<%= form_with model: article do |form| %>
-  <div>
-    <%= form.label :title %><br>
-    <%= form.text_field :title %>
+<%= form_with model: article, local: true do |form| %>
+  <div class="mb-3">
+    <%= form.label :title, class: "form-label" %>
+    <%= form.text_field :title, class: "form-control #{'is-invalid' if article.errors[:title].any?}" %>
+    
     <% article.errors.full_messages_for(:title).each do |message| %>
-      <div><%= message %></div>
+      <div class="invalid-feedback"><%= message %></div>
     <% end %>
   </div>
 
-<div>
-  <%= form.label :status %><br>
-  <%= form.select :status, Visible::VALID_STATUSES, selected: article.status || 'public' %>
-</div>
+  <div class="mb-3">
+    <%= form.label :status, class: "form-label" %>
+    <%= form.select :status, Visible::VALID_STATUSES, selected: article.status || 'public', class: "custom-select" %>
+  </div>
 
-  <div>
-    <%= form.label :body %><br>
-    <%= form.text_area :body %><br>
+  <div class="mb-3">
+    <%= form.label :body, class: "form-label" %>
+    <%= form.text_area :body, class: "form-control #{'is-invalid' if article.errors[:body].any?}" %>
+    
     <% article.errors.full_messages_for(:body).each do |message| %>
-      <div><%= message %></div>
+      <div class="invalid-feedback"><%= message %></div>
     <% end %>
   </div>
 
-  <div>
-    <%= form.submit %>
-  </div>
+  <div class="mb-3">
+    <%= form.submit "Save Article", class: "btn btn-primary" %>
+</div>
 <% end %>
