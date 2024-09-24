@@ -4,9 +4,11 @@
   <p class="lead"><%= @article.body %></p>
 
   <div class="d-flex mb-4">
+    <% if user_signed_in? %>
     <%= link_to "Edit", edit_article_path(@article), class: "btn btn-warning me-2" %>
     <%= link_to "Destroy", article_path(@article), class: "btn btn-danger", data: { 
           turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
+    <% end %>
   </div>
 
   <h2>Comments</h2>
@@ -14,9 +16,11 @@
     <%= render @article.comments %>
   </div>
 
+<% if user_signed_in? %>
   <h2 class="mb-3">Add a comment:</h2>
   <div class="card">
     <div class="card-body">
       <%= render "comments/form", article: @article %>
     </div>
   </div>
+<% end %>
