@@ -1,5 +1,12 @@
 class ArticlesController < ApplicationController
   before_action :authenticate_user!, except: [ :index, :show ]
+  before_action :article_owner, only: [ :edit, :update, :destroy ]
+
+  def article_owner
+    @article = Article.find(params[:id])
+    redirect_to root_path, notice: "You don't have permission to edit this article." unless @article.user == current_user
+  end
+
   def index
     @articles = Article.all
   end
@@ -14,6 +21,8 @@ class ArticlesController < ApplicationController
 
   def create
     @article = Article.new(article_params)
+    @article.user = current_user
+    @article.save
 
     if @article.save
       redirect_to @article

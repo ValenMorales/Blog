@@ -7,7 +7,7 @@
       <p class="mb-3">
         <strong>Comment:</strong> <%= comment.body %>
       </p>
-      <% if user_signed_in? %>
+      <% if user_signed_in? && comment.user == current_user %>
       <%= link_to "Destroy Comment", [comment.article, comment], class: "btn btn-danger", data: {
             turbo_method: :delete,
             turbo_confirm: "Are you sure?"
