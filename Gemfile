@@ -5,7 +5,7 @@ gem "rails", "~> 7.2.1"
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem "sprockets-rails"
 # Use sqlite3 as the database for Active Record
-gem "sqlite3", ">= 1.4"
+gem "pg"
 # Use the Puma web server [https://github.com/puma/puma]
 gem "puma", ">= 5.0"
 # Use JavaScript with ESM import maps [https://github.com/rails/importmap-rails]
@@ -18,7 +18,7 @@ gem "stimulus-rails"
 gem "jbuilder"
 # Use Redis adapter to run Action Cable in production
 # gem "redis", ">= 4.0.1"
-
+gem "dotenv-rails", groups: [ :development, :test ]
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
 # gem "kredis"
 
@@ -30,6 +30,10 @@ gem "tzinfo-data", platforms: %i[ windows jruby ]
 
 # Reduces boot times through caching; required in config/boot.rb
 gem "bootsnap", require: false
+
+gem "bootstrap", "~> 5.3.3"
+
+gem "dartsass-sprockets"
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
@@ -54,4 +58,10 @@ group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem "capybara"
   gem "selenium-webdriver"
+end
+
+gem "devise", "~> 4.9"
+
+group :development, :test do
+  gem "rspec-rails", ">= 3.9.0"
 end
