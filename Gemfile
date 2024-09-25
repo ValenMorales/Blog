@@ -63,5 +63,5 @@ end
 gem "devise", "~> 4.9"
 
 group :development, :test do
-  gem 'rspec-rails', ">= 3.9.0"
+  gem "rspec-rails", ">= 3.9.0"
 end
