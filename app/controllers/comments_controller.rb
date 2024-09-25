@@ -1,12 +1,20 @@
 class CommentsController < ApplicationController
   before_action :authenticate_user!
   before_action :comment_author, only: [ :destroy ]
+  before_action :can_comment?, only: [ :create ]
 
   def comment_author
     @comment = Comment.find(params[:id])
     unless @comment.user == current_user
       flash[:alert] = "You can only delete your own comments."
       redirect_to root_path
+    end
+  end
+
+  def can_comment?
+    article_author = Article.find(params[:article_id]).user
+    unless current_user.following?(article_author)
+      redirect_to article_path(params[:article_id]), alert: "You need to follow the author to comment."
     end
   end
 

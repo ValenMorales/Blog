@@ -3,6 +3,16 @@
 
   <p class="lead"><%= @article.body %></p>
 
+<div class="follow-section">
+  <% if user_signed_in? %>
+  <% if current_user.following?(@article.user) %>
+  <%= button_to 'Unfollow', user_follow_path(@article.user), method: :delete,  remote: true %>
+<% else %>
+  <%= button_to 'Follow', user_follow_path(@article.user), method: :post,  remote: true %>
+<% end %>
+<%end%>
+</div>
+
   <div class="d-flex mb-4">
     <% if user_signed_in? && @article.user == current_user %>
     <%= link_to "Edit", edit_article_path(@article), class: "btn btn-warning me-2" %>
@@ -16,7 +26,7 @@
     <%= render @article.comments %>
   </div>
 
-<% if user_signed_in? %>
+<% if user_signed_in? && current_user.following?(@article.user) %>
   <h2 class="mb-3">Add a comment:</h2>
   <div class="card">
     <div class="card-body">
